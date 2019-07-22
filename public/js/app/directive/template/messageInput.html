@@ -1,0 +1,25 @@
+<div class='input-region-textarea'>
+    <textarea class='form-control' ng-model="messageBody" ng-enter="postNormalMessage()" id='input-message-body'></textarea>
+    <div class='input-region-function'>
+        <input class="hiddenfile" type="checkbox" ng-model="importantMessage" id="importantMessage"> 
+            <span class='glyphicon glyphicon-exclamation-sign' ng-click="checkImportantMessage(importantMessage)" data-toggle="modal" style="color: red;"ng-show="importantMessage"></span>
+            <span class='glyphicon glyphicon-exclamation-sign' ng-click="checkImportantMessage(importantMessage)" data-toggle="modal" ng-show="!importantMessage"></span>
+        <span class='glyphicon glyphicon-paperclip' id='fileAttachment' ng-click="events.attachFile()"></span>
+        <span class="glyphicon icon-smile" ng-click="events.selecetEmoticon()"></span>
+        <!-- <span class='glyphicon glyphicon-pencil' data-toggle="modal" data-target="#ckeditorDialog"></span> -->
+    </div>
+</div>
+
+<div class='input-region-submit'>
+    <button type="submit" class="btn btn-default btn-custom" ng-click='postNormalMessage()'>Send</button>
+</div>
+
+<div class="hiddenfile">
+    <form method="post" action="message" id='testform' target="my_iframe" enctype="multipart/form-data">
+        <input type="input" name="roomId" value='' id='attachment_room'/>
+        <input type="input" name="memberId" value='' id='attachment_member'/>
+        <input type="input" name="body" value=''/>
+        <input type="input" name="emoticonId" value=''/>
+        <input type="file" name="attachment" id="fileAttachmentHidden"/>
+    </form>
+</div>

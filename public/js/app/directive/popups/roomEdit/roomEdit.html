@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="close()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Edit Room</h4>
+</div>
+                
+<form method="post" action="room" id='editRoomForm' target="my_iframe" enctype="multipart/form-data" class="form-horizontal" style="margin-top:20px">
+    <fieldset>
+        
+        <div style="padding: 0 0px 10px 20px">
+            <label class="control-label" for="textinput">Room Name</label>  
+        </div>
+         
+        <div class="col-md-12" style="margin-bottom: 10px">
+            <input ng-model="room.name" id="username" name="name" type="text" placeholder="Room Name" class="form-control input-md">
+        </div>
+
+        <div style="padding: 0 0 10px 20px">
+            <label class="control-label" for="textinput">User List</label>  
+        </div>
+        <div class="col-md-12" style="padding-bottom: 10px">
+            <div class="col-md-6">
+                <input ng-model="query" id="query" name="username2" type="text" placeholder="Search member" class="form-control input-md ">
+            </div>
+            <div class="col-md-6">
+                <label ng-bind="room.name" class="control-label"></label>  
+            </div>
+        </div>
+        <div style="text-align:center" class="col-md-12">
+            <div class="col-md-6" style="height: 350px; text-align: left">
+                <ul class='ul-side-content no-padding-margin'>
+                    <li class="list-group-item" ng-repeat="member in searchedMemberList | filter:query | orderBy: 'name'">
+                        <img ng-src="images/avatar/{{member.avatar}}" class='img-circle member-list-avatar' />
+                        <span style="display: inline-block; width: 120px" ng-bind="member.name"></span>
+                        <span class="badge" ng-click="addMember(member)" style="margin-top: 15px; cursor: pointer; padding-bottom: 6px;">>></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-6" style="height: 350px; text-align: left" >
+                <ul id="selectedMembersList" class='ul-side-content no-padding-margin'>
+                    <li class="list-group-item" ng-repeat="member in roomMemberList">
+                        <img ng-src="images/avatar/{{member.user.avatar}}" class='img-circle member-list-avatar' />
+                        <span style="display: inline-block; width: 100px" ng-bind="member.user.name"></span>
+                        <span class="badge bage-ad" ng-click="setAdmin(member)" ng-class="member.isAdmin?'bage-ad-admin' :'' ">AD</span>
+                        <span class="badge" ng-click="removeMember(member)" style="margin-top: 15px; cursor: pointer; padding-bottom: 6px;">X</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-default btn-custom" ng-click="updateRoom()">Update</button>
+</div>

@@ -1,0 +1,43 @@
+    <div class='hidden-md hidden-lg timeline-header-menu'>
+        <span class="glyphicon glyphicon-th" id='collapseMenu'></span>
+    </div>
+    <div class='timeline-header-left'>
+        <div class='avatar'>
+            <img ng-src='images/avatar/thumbnails/{{user.avatar}}' class='img-circle'  ng-click="userSetting()"/>
+        </div>
+        <div class='hidden-xs hidden-sm profile'>
+            <p class='no-padding-margin custom-truncate' ng-bind="user.name"></p>
+            <p class='no-padding-margin custom-truncate' ng-bind="user.position.name"></p>
+        </div>
+    </div>
+    <div class='timeline-header-right'>
+        <div class='timeline-header-room-name custom-truncate'>
+            <span ng-bind="room.name" ng-click="onRoomEditClick()" ng-class="isRoomAdmin? 'admin-edit' : ''"></span>
+            <span class='glyphicon glyphicon-cog ic-roomedit'></span>
+        </div>
+        <div style="float:right; display: inline-flex;">
+            <div class='timeline-header-member'>
+                <span class='glyphicon glyphicon-user' id='collapseMember'></span>
+            </div>
+        </div>
+    </div>
+    <div class='row no-padding-margin timeline-pushpin'>
+        <div class='timeline-pushpin-left'>
+            <div class='timeline-pushpin-avatar'>
+                <span class='glyphicon glyphicon-bullhorn'></span>
+                <!-- <img src='images/emoticon/1/21.png' class='img-circle' /> -->
+            </div>
+            <!-- <div class='hidden-xs hidden-sm timeline-pushpin-profile'>
+                <p class='no-padding-margin'>To: All</p>
+                <p class='no-padding-margin'>From: TChat Team</p>
+            </div> -->
+        </div>
+        <div class='timeline-pushpin-right'>
+            <div class='timeline-pushpin-content'>
+                <p style="font-size:22px" class='no-padding-margin'>{{notification.content}}</p>
+            </div>
+            <div class='timeline-pushpin-remove'>
+                <span class='glyphicon glyphicon-remove'></span>
+            </div>
+        </div>
+    </div>

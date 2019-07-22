@@ -1,0 +1,8 @@
+<div class='right-menu' style="display: block; height: calc(100%);">
+    <ul class='ul-side-content no-padding-margin'>
+        <li ng-repeat="member in members">
+            <img ng-src="images/avatar/thumbnails/{{member.user.avatar}}" class='img-circle member-list-avatar' ng-click="viewProfile(member.user)" />
+            <span ng-bind="member.user.name" ng-class="member.user.status==1? (member.isAdmin?'admin-online':' member-online') : (member.isAdmin?'admin-offline' : 'member-offline')"></span>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,78 @@
+
+    <div class="trick-message-list"></div>
+    <ul class="nav nav-list message-list" id='messageList'  scroll-glue keep-scroll>
+        <li class="row no-padding-margin message-list-li" ng-init="isLoading = true" ng-hide="isLoading"><center><img src="images/loading.gif"/></center></li>
+        <li class="row no-padding-margin message-list-li" ng-repeat="message in messages" ng-attr-id="{{ 'message-' + message.index }}">
+            <div class="date-label" ng-if="message.dateLabel != undefined"><span class="glyphicon glyphicon-time"></span><span ng-bind="message.dateLabel"></span></div>
+
+            <div ng-if="message.dateLabel == undefined" class='no-padding-margin message-list-avatar' >
+                <img ng-src="images/avatar/thumbnails/{{room.isAnonymous?'anonymous.jpg': message.member.avatar}}" ng-click="viewProfileMember(message.member)"/>
+            </div>
+            <div ng-if="message.dateLabel == undefined" class='no-padding-margin message-list-body' >
+                <div class='row no-padding-margin message-list-user'>
+                    <span ng-if="!room.isAnonymous" ng-bind="message.member.name"></span>
+                </div>
+                <ul class='nav nav-list'>
+                    <li ng-repeat="messageBody in message.messageList" class="position-fixed message-body-li" scroll-item context-menu data-target="menu-{{ messageBody.id }}" ng-attr-id="{{ 'messageid-' + messageBody.id }}">
+                        <div class='row no-padding-margin message-reply' ng-if="messageBody.messagereply != null && messageBody.messagetypeId != 5" ng-switch on="messageBody.messagereply.messagetypeId">
+                            <div class='message-list-content message-reply-bg message-background' ng-switch-when="1"><span ng-bind-html="trustAsHtml(messageBody.messagereply.tempBody)"></span></div>
+                            <div class='message-list-content message-reply-bg message-background' ng-switch-when="6"><span ng-bind-html="trustAsHtml(messageBody.messagereply.body)"></span></div>
+                            <div class='message-list-content message-reply-bg' style="white-space: normal; padding-left: 10px"  ng-switch-when="2">
+                            <span ng-bind-html="trustAsHtml(messageBody.messagereply.tempBody)"></span>
+                            <span class='glyphicon glyphicon-file'></span><a ng-href="{{messageBody.messagereply.attachment}}" download="{{messageBody.messagereply.attachmentFileName}}"><span ng-bind="messageBody.messagereply.attachmentFileName"></span></a></div>
+
+                            <div class='message-list-content message-reply-bg' style="white-space: normal; padding-left: 10px" ng-switch-when="3">
+                            <span ng-bind-html="trustAsHtml(messageBody.messagereply.tempBody)"></span>
+                            <img class='message-list-content-image' ng-src='{{messageBody.messagereply.attachment | thumbs}}' ng-click="openReviewDialog(messageBody.messagereply)"></div>
+
+                            <!-- <div class='message-list-content' ng-switch-when="4">
+                            <a ng-href="images/emoticon/{{messageBody.messagereply.emoticon.emoticongroupId}}/{{messageBody.emoticon.image}}" target="_blank">
+                            <img class='message-list-content-image' ng-src='images/emoticon/{{messageBody.messagereply.emoticon.emoticongroupId}}/{{messageBody.messagereply.emoticon.image}}'></a>
+                            </div> -->
+
+                            <!-- <div class='message-list-content message-background message-deleted' ng-switch-when="5"><span>Message was deleted.</span></div> -->
+                            <!-- <div class='message-list-time'><span ng-bind="messageBody.messagereply.tempTime"></span></div> -->
+                        </div>
+                        <div class='row no-padding-margin' ng-switch on="messageBody.messagetypeId">
+                            <div class='message-list-content message-background' ng-switch-when="1"><span ng-bind-html="trustAsHtml(messageBody.tempBody)"></span></div>
+                            <div class='message-list-content message-background important-message' ng-switch-when="7">
+                            <span class='glyphicon glyphicon-exclamation-sign' style="margin-right: 10px; margin-top: 2px"></span>
+                            <span ng-bind-html="trustAsHtml(messageBody.tempBody)"></span></div>
+
+                            <div class='message-list-content message-background' style="padding-top:10px; line-height:1.0" ng-switch-when="6"><span ng-bind-html="trustAsHtml(messageBody.body)"></span></div>
+                            <div class='message-list-content' ng-switch-when="2"><span class='glyphicon glyphicon-file'></span><a ng-href="{{messageBody.attachment}}" download="{{messageBody.attachmentFileName}}"><span ng-bind="messageBody.attachmentFileName"></span></a></div>
+                            <div class='message-list-content' ng-switch-when="3"><img class='message-list-content-image' ng-src='{{messageBody.attachment | thumbs}}' ng-click="openReviewDialog(messageBody)"></div>
+                            <div class='message-list-content' ng-switch-when="4"><a ng-href="images/emoticon/{{messageBody.emoticon.emoticongroupId}}/{{messageBody.emoticon.image}}" target="_blank"><img class='message-list-content-image' ng-src='images/emoticon/{{messageBody.emoticon.emoticongroupId}}/{{messageBody.emoticon.image}}'></a></div>
+                            <div class='message-list-content message-background message-deleted' ng-switch-when="5"><span>Message was deleted.</span></div>
+                            <div class='message-list-time'><span ng-bind="messageBody.tempTime"></span></div>
+                        </div>
+
+                        <div class="dropdown position-fixed" id="menu-{{ messageBody.id }}" style="z-index:9999;">
+                            <ul ng-if="messageBody.messagetypeId != 5" class="dropdown-menu" role="menu">
+                                <li ng-if="messageBody.messagetypeId == 3">
+                                    <a class="pointer" role="menuitem" tabindex="1" ng-href="{{messageBody.attachment}}" target="_blank" download="{{messageBody.attachmentFileName}}">Download</a>
+                                <li>
+                                <li ng-if="message.member.id == user.id && (messageBody.messagetypeId == 1 || messageBody.messagetypeId == 7)">
+                                    <a class="pointer" role="menuitem" tabindex="2" ng-click="editMessage(messageBody)">Edit</a>
+                                </li>
+                                <li ng-if="message.member.id == user.id && messageBody.messagetypeId == 6">
+                                    <a class="pointer" role="menuitem" tabindex="3" ng-click="editMessageWithEditor(messageBody)">Edit with editor</a>
+                                </li>
+                                <li ng-if="message.member.id == user.id">
+                                    <a class="pointer" role="menuitem" tabindex="4" ng-click="deleteMessage(messageBody)">Delete</a>
+                                </li>
+                                <li>
+                                    <a class="pointer" role="menuitem" tabindex="5" ng-click="replyMessage(messageBody)">Reply</a>
+                                </li>
+                                <!-- <li>
+                                    <a class="pointer" role="menuitem" tabindex="6" ng-click="replyMessage(messageBody)">Reply with editor</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+<!-- end message list -->

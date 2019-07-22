@@ -1,0 +1,52 @@
+<body ng-app="tchat" >
+    <header ng-controller="HomeController">
+        <div class='container-fluid header-content no-padding-margin'>
+            <div class='row no-padding-margin'>
+                <div class='col-xs-5 col-sm-4 col-md-2 no-padding-margin logo'>
+                    <img src='images/logo.png' />
+                </div>
+                <div class='col-xs-3 col-sm-4 col-md-8 no-padding-margin'>
+                </div>
+                <div class='col-xs-4  col-sm-4 col-md-2 no-padding-margin' >
+                    <div class='col-xs-1 no-padding-margin' ></div>
+                    <div class="box col-xs-10 no-padding-margin">
+                        <div class="search">
+                            <span class="glyphicon glyphicon-search icon"></span>
+                            <input ng-model="$root.searchMsg" type="search" id="search" placeholder="Search..." />
+                        </div>
+                    </div>
+                    <div class='col-xs-1 no-padding-margin' ></div>
+                </div> 
+            </div>
+        </div> 
+    </header>
+    <div class='container-fluid no-padding-margin' style="display: block;height: calc(100% - 50px);">
+        <div class='row no-padding-margin' style="display: block;height: calc(100%);">
+
+            <div left-menu class='col-xs-4 col-md-2 col-md-2 hidden-xs hidden-sm no-padding-margin left-content' id='menuList'></div>
+            <div class='col-xs-12 col-md-10 no-padding-margin timeline' id='timeline' style="display: block; height: calc(100%);">
+                <div room-header class='row no-padding-margin timeline-header'></div>
+                <div message-list class='message-region' style="display: block; height: calc(100% - 180px);"></div>
+                <div message-input class='input-region'></div>
+            </div>
+            <div right-menu class='col-xs-4 col-md-2 hidden-xs hidden-sm hidden-md hidden-lg no-padding-margin right-content' id='memberList'>
+
+        <div class="chat-window-more-member" ng-if="conversationList.length > 3" ng-click="changeCollapseListMore()">
+            <span class="glyphicon glyphicon-user"></span>
+        </div>
+        <div class="chat-window-more-member-name" style="bottom: {{(conversation.index - 3) * 30}}px;" ng-click="switchChat(conversation)" ng-repeat="conversation in conversationList" ng-if="conversation.index > 3 && collapseListMore==true">
+            <span ng-bind="conversation.name"></span>
+        </div>
+    </div>
+    <div direct-chat></div>
+    <iframe width="0" height="0" name="my_iframe" src="not_submitted_yet.aspx" style="display:none;"></iframe>
+    <script src="/js/lib/jquery/jquery-2.1.1.min.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/plugins/scrollglue.js"></script>
+    <script src="/js/lib/plugins/ng-context-menu.min.js"></script>
+    <!-- <script src="/plugins/ckeditor/ckeditor.js"></script> -->
+    <script src="/js/lib/unveil.js"></script>
+    <script src="/js/lib/script.js"></script>
+    <script src="/js/lib/jquery/jquery.titlealert.min.js"></script>
+    <script src="/js/lib/layout.js"></script>
+</body>

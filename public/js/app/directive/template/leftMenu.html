@@ -1,0 +1,84 @@
+<div class='left-menu'>
+    <ul>
+        <!-- <li class='active'>
+            <a href='#'>
+                <span class='glyphicon glyphicon-home'></span>
+                <span class='left-menu-title'>Home</span>
+            </a>
+        </li> -->
+        <li class='has-sub'>
+            <a id="roomListMenu">
+                <span class='glyphicon glyphicon-list-alt'></span>
+                <span class='left-menu-title'>Rooms</span>
+            </a>
+            <ul room-list></ul>
+        </li>
+
+        <li ng-if="canAddRoom">
+            <a ng-click="onRoomCreateClick()">
+                <span class='glyphicon glyphicon-plus'></span>
+                <span class='left-menu-title'>New Room</span>
+            </a>
+        </li>
+        <li ng-if="canAddRoom">
+            <a ng-click="onAnnounceMessage()">
+                <span class='glyphicon glyphicon-send'></span>
+                <span class='left-menu-title'>Notification</span>
+            </a>
+        </li>
+        <!--<li class='has-sub'>
+            <a href='#'>
+                <span class='glyphicon glyphicon-star-empty'></span>
+                <span class='left-menu-title'>Events</span>
+            </a>
+            <ul>
+                <li>
+                    <a>
+                        <span>Break time</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span>Euro 2016</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span>World cup 2018</span>
+                    </a>
+                </li>
+            </ul>
+        </li> -->
+        <li class='has-sub'>
+            <a id="settingsMenu">
+                <span class='glyphicon glyphicon-wrench'></span>
+                <span class='left-menu-title'>Settings</span>
+            </a>
+            <ul>
+                <li>
+                    <a ng-click="onProfileClick()">
+                        <span>User Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="onRoomConfigClick()">
+                        <span>Room Settings</span>
+                        <span style="background: yellow; color: red" class='badge left-menu-title'>NEW</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a >
+                <span class='glyphicon glyphicon-envelope'></span>
+                <span class='left-menu-title'>Contact</span>
+            </a>
+        </li>
+        <li class='last'>
+            <a ng-click="logout()">
+                <span class='glyphicon glyphicon-off'></span>
+                <span class='left-menu-title'>Log out</span>
+            </a>
+        </li>
+    </ul>
+</div>

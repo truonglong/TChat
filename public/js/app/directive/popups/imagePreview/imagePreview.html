@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Image Preview</h4>
+</div>
+
+<div class="review-body" id="review-body" id='reviewDialog' elem-ready="imagePreviewReady()">
+    <img id="review-image" ng-src="{{message.attachment}}" class='message-list-content-image-review' src='images/loading.gif'>
+</div>
+ <div class="modal-footer">
+    <a class="btn btn-default btn-custom" role="menuitem" ng-click="closeReviewDialog()" tabindex="1" ng-href="{{message.attachment}}" target="_blank" download="{{message.attachmentFileName}}">Download</a>
+</div>

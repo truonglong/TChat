@@ -1,0 +1,48 @@
+<div class="chat-window-background">
+    <div class="chat-window" style="right: 0;"id="chat-window">
+        <div class="chat-window-title" ng-click="collapseList()">
+            <div class="text">Member</div>
+        </div>
+        
+        <div class="chat-window-content" style="display: block;" >
+            <div class="chat-window-inner-content user-list" style="max-height: calc(100% - 28px);">
+                <div class="user-list-item" data-val-id="2" ng-repeat="member in chatMembers" ng-click="openchat(member)" >
+                    <img class="profile-picture" ng-src="images/avatar/{{member.avatar}}">
+                    <div ng-if="member.status==1" class="profile-status online"></div>
+                    <div class="content"><span ng-bind="member.name"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="conversation.index < 4" ng-attr-id="chat-window-{{conversation.id}}" class="chat-window-member" style="right: {{conversation.index * 240}}px;" ng-repeat="conversation in conversationList">
+        <div class="chat-window-title" ng-click="collapseList(conversation.id)">
+            <div class="close" ng-click="removeChat(conversation)"><span class="glyphicon glyphicon-remove"></span></div>
+            <div class="text">{{conversation.name}} <span ng-if="conversation.newMsgCount > 0" class="conv-new-count">{{conversation.newMsgCount}}</span></div>
+            
+        </div>
+        <div class="chat-window-content" >
+            <div class="chat-window-inner-content message-board pm-window" style="height: 235px;">
+                <div class="messages-wrapper" style="height: 214px;" scroll-glue keep-scroll>
+                    <div class="chat-message" data-val-user-from="1" ng-repeat="message in conversation.messageList" scroll-item >
+                        <div class="chat-gravatar-wrapper">
+                            <img ng-attr-title="{{message.member.name}}" class="profile-picture" ng-src="images/avatar/{{message.member.avatar}}">
+                        </div>
+                        <div class="chat-text-wrapper">
+                            <p class="" ng-attr-title="{{message.convertedTime}}">{{message.content}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-window-text-box-wrapper">
+                    <textarea ng-model="conversation.messageBody" ng-keydown="postChat($event, conversation)" rows="2" class="chat-window-text-box" style="overflow: hidden; word-wrap: break-word; resize: none; height: 21px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-window-more-member" ng-if="conversationList.length > 3" ng-click="changeCollapseListMore()">
+        <span class="glyphicon glyphicon-user"></span>
+    </div>
+    <div class="chat-window-more-member-name" style="bottom: {{(conversation.index - 3) * 30}}px;" ng-click="switchChat(conversation)" ng-repeat="conversation in conversationList" ng-if="conversation.index > 3 && collapseListMore==true">
+        <span ng-bind="conversation.name"></span>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+{
+  "name": "TChat",
+  "version": "0.0.3",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "connect-busboy": "0.0.2",
+    "ejs": "*",
+    "express": "3.0.6",
+    "image-size": "^0.5.0",
+    "jimp": "^0.2.24",
+    "multer": "^1.1.0",
+    "mysql": "^2.5.5",
+    "passport": "^0.3.2",
+    "passport-ldapauth": "^0.5.0",
+    "sequelize": "^2.0.4",
+    "socket.io": "^1.4.6"
+  }
+}

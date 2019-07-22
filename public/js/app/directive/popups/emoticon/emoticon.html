@@ -1,0 +1,16 @@
+<div class="modal-body" height="500px">
+    <div role="tabpanel">
+    <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" ng-repeat="group in groups" ng-class="group.class" ng-click="getEmoticonList(group)"><a onclick="return false;" href="#emoticon{{group.id}}" aria-controls="{{group.id}}" role="tab" data-toggle="tab"><span ng-bind="group.name"></span></a></li>
+        </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane {{group.class}} emoticon-list" id="emoticon{{group.id}}" ng-repeat="group in groups" >
+            <div ng-repeat="emoticon in group.emoticons" class='emoticon-list-item' ng-dblClick="postEmoticonMessage(emoticon)">
+                <img ng-src='images/emoticon/{{group.id}}/{{emoticon.image}}'/>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

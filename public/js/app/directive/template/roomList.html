@@ -1,0 +1,9 @@
+<li ng-repeat="room in rooms">
+    <a ng-if="room.isVisible" class="room-row" ng-click="switchRoom(room)">
+        <span ng-if="room.id == currentRoom.id" class="current-room" ng-bind="room.name"></span>
+        <span ng-if="room.id != currentRoom.id" ng-bind="room.name"></span>
+        <span ng-if="true == room.newMessage" class='glyphicon glyphicon-comment left-menu-title'></span>
+        <span class='glyphicon glyphicon-cog ic-edit' ng-if="room.isAdmin" ng-click='onRoomEdit(room); $event.stopPropagation();'></span>
+        <span ng-if="true == room.isAnonymous" ng-class="room.id == currentRoom.id? 'current-room':''" class='glyphicon glyphicon-user left-menu-title'></span>
+    </a>
+</li>

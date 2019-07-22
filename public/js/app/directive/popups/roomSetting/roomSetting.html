@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="close()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Room Settings</h4>
+</div>
+
+<form method="post" action="room" id='editRoomForm' target="my_iframe" enctype="multipart/form-data" class="form-horizontal" style="margin-top:20px">
+    <fieldset>
+        <div style="text-align:center" class="col-md-12">
+            <div class="col-md-12" style="height: 350px; text-align: left">
+                <ul class='ul-side-content no-padding-margin'>
+                    <li class="list-group-item" ng-repeat="room in rooms">
+                        <!-- <img ng-src="images/avatar/{{member.avatar}}" class='img-circle member-list-avatar' /> -->
+                        <span style="display: inline-block; width: 120px" ng-bind="room.name"></span>
+                        <span class="badge" ng-class="room.isNotify?'bage-on' :'' " ng-click="toggleNotify(room)" style="margin-top: 0px; cursor: pointer; padding-bottom: 6px;">Notify</span>
+
+                        <span class="badge" ng-class="room.isVisible?'bage-on' :'' " ng-click="toggleVisible(room)" style="margin-top: 0px; cursor: pointer; padding-bottom: 6px;">Visible</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-default btn-custom" ng-click="updateSetting()">Update</button>
+</div>

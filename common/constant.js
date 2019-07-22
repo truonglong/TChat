@@ -1,0 +1,6 @@
+var ErrorType = {
+	LOGIN_ERROR_AUTHENTICATION : 301323,
+	LOGIN_ERROR_SERVER_ERROR : 829572
+}
+
+exports.ErrorType = ErrorType;
